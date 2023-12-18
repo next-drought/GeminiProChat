@@ -44,6 +44,7 @@ export const post: APIRoute = async(context) => {
     const responseStream = new ReadableStream({
       async start(controller) {
         for await (const chunk of stream) {
+          // Assuming 'chunk' is an instance of Uint8Array. If not, you will need to adjust this.
           const textChunk = decoder.decode(chunk, { stream: true }) // Decode the chunk
           controller.enqueue(new TextEncoder().encode(textChunk)) // Encode and enqueue the text chunk
         }
