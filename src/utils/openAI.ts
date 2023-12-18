@@ -30,11 +30,8 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
       let buffer = ''
 
       for await (const chunk of result.stream) {
-        // Ensure the chunk is a Uint8Array
-        const uint8Chunk = new Uint8Array(await chunk.arrayBuffer())
-
         // Combine the buffer with the new chunk
-        const combinedChunk = buffer + decoder.decode(uint8Chunk, { stream: true })
+        const combinedChunk = buffer + decoder.decode(chunk, { stream: true })
 
         // Find the last complete character
         const lastCompleteCharIndex = findLastCompleteCharIndex(combinedChunk)
