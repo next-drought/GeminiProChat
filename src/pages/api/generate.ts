@@ -39,14 +39,15 @@ export const post: APIRoute = async(context) => {
 
     // Start chat and send message with streaming
     const stream = await startChatAndSendMessageStream(history, newMessage)
+    const decoder = new TextDecoder() // TextDecoder to handle UTF-8 text stream
 
     const responseStream = new ReadableStream({
       async start(controller) {
         for await (const chunk of stream) {
-          const text = await chunk.text()
-          const queue = new TextEncoder().encode(text)
-          controller.enqueue(queue)
+          const textChunk = decoder.decode(chunk, { stream: true }) // Decode the chunk
+          controller.enqueue(new TextEncoder().encode(textChunk)) // Encode and enqueue the text chunk
         }
+        controller.enqueue(new TextEncoder().encode(decoder.decode())) // Flush the decoder by passing no value
         controller.close()
       },
     })
