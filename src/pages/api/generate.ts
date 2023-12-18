@@ -38,7 +38,18 @@ export const post: APIRoute = async(context) => {
     const newMessage = messages[messages.length - 1].parts.map(part => part.text).join('')
 
     // Start chat and send message with streaming
-    const responseStream = await startChatAndSendMessageStream(history, newMessage)
+    const stream = await startChatAndSendMessageStream(history, newMessage)
+
+    const responseStream = new ReadableStream({
+      async start(controller) {
+        for await (const chunk of stream) {
+          const text = await chunk.text()
+          const queue = new TextEncoder().encode(text)
+          controller.enqueue(queue)
+        }
+        controller.close()
+      },
+    })
 
     return new Response(responseStream, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
   } catch (error) {
