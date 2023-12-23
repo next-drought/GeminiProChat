@@ -53,7 +53,7 @@ You can control the website through environment variables.
 | Name | Description | Required |
 | --- | --- | --- |
 | `GEMINI_API_KEY` | Your API Key for GEMINI. You can get it from [here](https://makersuite.google.com/app/apikey).| **Yes** |
-| `API_BASE_URL` | Custom base url for GEMINI API. Click [here](https://github.com/babaohuang/GeminiProChat?tab=readme-ov-file#solution-for-user-location-is-not-supported-for-the-api-use) to see when to use this. | No |
+| `API_BASE_URL` | Custom base url for GEMINI API. Click [here](https://github.com/next-drought/GeminiProChat?tab=readme-ov-file#solution-for-user-location-is-not-supported-for-the-api-use) to see when to use this. | No |
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | No |
 | `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | No |
 | `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | No |
@@ -62,7 +62,7 @@ You can control the website through environment variables.
 
 ### Deploy With Vercel(Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/babaohuang/GeminiProChat&env=GEMINI_API_KEY&envDescription=Google%20API%20Key%20for%20GeminiProChat&envLink=https://makersuite.google.com/app/apikey)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/next-drought/GeminiProChat&env=GEMINI_API_KEY&envDescription=Google%20API%20Key%20for%20GeminiProChat&envLink=https://makersuite.google.com/app/apikey)
 
 Just click the button above and follow the instructions to deploy your own copy of the app.
 
@@ -79,8 +79,17 @@ Just click the button above and follow the instructions to deploy your own copy 
 
 ### Deploy With Docker
 
-Although this project provides a Dockerfile, there is currently a known bug with the Docker deployment method. I am actively working on fixing this issue. Therefore, Docker deployment is not recommended at this moment. If any contributors have a solution to fix this bug, your contributions are highly welcomed. Please feel free to submit a Pull Request (PR) to help me resolve this issue.
+With the Dockerfile
+
+```
+docker build -t chatbotgemini .
+```
+
+and run 
+```
+docker run -p 3000:3000 chatbotgemini
+```
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=babaohuang/geminiprochat&type=Timeline)](https://star-history.com/#babaohuang/geminiprochat&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=next-drought/geminiprochat&type=Timeline)](https://star-history.com/#babaohuang/geminiprochat&Timeline)
